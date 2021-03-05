@@ -16,7 +16,7 @@ public class StreamEx02 {
 		
 		Stream<File> file_stream = Stream.of(arr);
 		file_stream.map(File::getName)
-			.filter(name->name.indexOf('.')!=-1)
+			.filter(name -> name.indexOf('.')!=-1)
 			.map(str -> str.substring(str.indexOf('.')+1))
 			.map(String::toUpperCase)
 			.distinct()
