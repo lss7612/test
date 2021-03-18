@@ -14,6 +14,7 @@ public class Enum {
 		System.out.println(name);
 		List<Season> list = new ArrayList<Enum.Season>();
 		list.add(Season.SPRING);
+		System.out.println(list);
 //		list.add("SPRING"); // 에러
 	}
 	

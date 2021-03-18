@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>a.b</groupId>
 	<artifactId>c</artifactId>
@@ -8,18 +9,59 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.6</java-version>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+		<java-version>1.8</java-version>
+		<org.springframework-version>5.2.3.RELEASE</org.springframework-version>
+		<spring.security.version>5.2.2.RELEASE</spring.security.version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		
+		<!-- Google Ads API -->
+		<dependency>
+		  <groupId>com.google.api-ads</groupId>
+		  <artifactId>google-ads</artifactId>
+		  <version>11.0.0</version>
+		</dependency>
+		
+		<!-- LOMBOK -->
+		<dependency>
+	    <groupId>org.projectlombok</groupId>
+	    <artifactId>lombok</artifactId>
+	    <version>1.16.10</version> <!--버전은 그때 맞춰서-->
+		</dependency>
+		
+		<!-- GSON -->
+		<dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.6</version>
+    </dependency>
+	
+		<!-- JACKSON -->
+		<dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.10.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
+      <version>2.10.4</version>
+    </dependency>
+	
+		<!-- 한글경로 파싱오류방지 -->
+		<dependency>
+		    <groupId>xerces</groupId>
+		    <artifactId>xercesImpl</artifactId>
+		    <version>2.9.1</version>
+		</dependency>	
 	
 		<dependency>
-  <groupId>com.google.api-ads</groupId>
-  <artifactId>google-ads</artifactId>
-  <version>11.0.0</version>
-</dependency>
+		  <groupId>com.google.api-ads</groupId>
+		  <artifactId>google-ads</artifactId>
+		  <version>11.0.0</version>
+		</dependency>
 	
 		 <!-- restful 라이브러리 -->
     <dependency>

@@ -1,4 +1,4 @@
-package googleAPITest;
+package tests.googleAPITest;
 
 import java.io.BufferedReader;
 import java.io.Console;
@@ -21,7 +21,7 @@ import com.google.common.collect.ImmutableList;
  *
  * <p>This example is meant to be run from the command line and requires user input.
  */
-public class CallTest01 {
+public class Get_Auth_Token {
 
   // Scopes for the generated OAuth2 credentials. The list here only contains the AdWords scope,
   // but you can add multiple scopes if you want to use the credentials for other Google APIs.
@@ -41,7 +41,7 @@ public class CallTest01 {
       // The console will be null when running this example in some IDEs. In this case, please
       // set the clientId and clientSecret in the lines below.
       clientId = "624023799723-ftk48aaq2m6bg9tpt5p1ig2mf8gjm6a5.apps.googleusercontent.com";
-      clientSecret = "HBVqdiXGn1OW8V_c_IYhpOu-";
+      clientSecret = "cVZJBNb9BaAsNYffaYKriPdp";
       // Ensures that the client ID and client secret are not the "INSERT_..._HERE" values.
       Preconditions.checkArgument(
           !clientId.matches("INSERT_.*_HERE"),
@@ -59,7 +59,7 @@ public class CallTest01 {
       clientSecret = String.valueOf(console.readPassword());
     }
 
-    new CallTest01().runExample(clientId, clientSecret);
+    new Get_Auth_Token().runExample(clientId, clientSecret);
   }
 
   public void runExample(String clientId, String clientSecret) throws IOException {
@@ -71,9 +71,9 @@ public class CallTest01 {
             .build();
     URL authorizationUrl = userAuthorizer.getAuthorizationUrl(null, null, null);
     System.out.printf("Paste this url in your browser:%n%s%n", authorizationUrl);
-
     // Waits for the authorization code.
     System.out.println("Type the code you received here: ");
+    System.out.println("asdfasdf");
     @SuppressWarnings("DefaultCharset") // Reading from stdin, so default charset is appropriate.
     String authorizationCode = new BufferedReader(new InputStreamReader(System.in)).readLine();
 
@@ -81,7 +81,6 @@ public class CallTest01 {
     UserCredentials userCredentials =
         userAuthorizer.getCredentialsFromCode(authorizationCode, null);
     System.out.printf("Your refresh token is: %s%n", userCredentials.getRefreshToken());
-
     // Prints the configuration file contents.
     Properties adsProperties = new Properties();
     adsProperties.put(ConfigPropertyKey.CLIENT_ID.getPropertyKey(), clientId);
@@ -94,7 +93,7 @@ public class CallTest01 {
     showConfigurationFile(adsProperties);
   }
 
-  private void showConfigurationFile(Properties adsProperties) throws IOException {
+  public static void showConfigurationFile(Properties adsProperties) throws IOException {
     System.out.printf(
         "Copy the text below into a file named %s in your home directory, and replace "
             + "INSERT_XXX_HERE with your configuration:%n",
@@ -113,4 +112,5 @@ public class CallTest01 {
     System.out.println(
         "######################## Configuration file end ##########################");
   }
+
 }
