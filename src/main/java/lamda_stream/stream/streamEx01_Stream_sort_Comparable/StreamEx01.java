@@ -22,6 +22,9 @@ public class StreamEx01 {
 		student_stream.sorted(
 				Comparator.comparing(Student::getBan).thenComparing(Comparator.naturalOrder())
 				).forEach(System.out::println);
+		
+		
+		
 	}
 	
 	static class Student implements Comparable<Student> {
