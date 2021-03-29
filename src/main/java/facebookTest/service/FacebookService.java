@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.stereotype.Service;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
@@ -15,13 +17,53 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Service
 public class FacebookService {
 
 	OkHttpClient okHttpClient = new OkHttpClient.Builder().callTimeout(300, TimeUnit.SECONDS).build();
 	Retrofit retrofit = new Retrofit.Builder().baseUrl(" https://graph.facebook.com/v9.0/").addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build();
 	FacebookConnect conn = retrofit.create(FacebookConnect.class);
-	String access_token = "EAAF0ICKIe54BAJ55d0G7H2ZAothZBZB2VZBr1VVEeGcOGAj13UHq9yQp81ibSgCHZCMKZA7lhe24MBjZC2unntsBQJ1Illa5N5BLZByMukkOpOcU0P8Cj8ZAOQQkZApSwWUb5Tk1scnlNJCTw4v8bZBaF7Om2EkGxWMUZASlFHCyjFo15EnBo0uzIhmhvgSgfUCHMNSwKYh0V6P88iFZCG5MWO8IS";
+	String access_token = "EAAF0ICKIe54BAJZCky5XXRh3MIiSFjHcPPbO6g7cZBuxpYkDW9ZCp0vPqeGwwPvVbQZAuksvmQF4unZB0nGm5XzV9NpoYoAxtACIAenr2pDPYv4tgbZAM4yZAIK3h3FnsIfWs2vxI1DtCXt8gVrDnmZBtUsgz58DjcItbHhAUJ0gAY01UwhuldVo2xKyIVbZBKZCDsPMWrOgtxmzGOpK4wTvWsYnB5hCIkgXI7OgKPAjL4blFC30eLc6UUw6IjYbDK5CUZD";
+	String page_id = "110801257752999";
 	Gson gson = new Gson();
+	
+	public boolean uploadVideo(
+			String upload_phase
+			, String file_size
+			, String start_offset
+			, String end_offset
+			, String upload_session_id) {
+		Map<String,Object> fields = new HashMap<>();
+		//매개변수가 null이 아닐때만 fields에 put한다.
+		if(upload_phase!=null) fields.put("upload_phase", upload_phase);
+		if(file_size!=null) fields.put("file_size", file_size);
+		if(start_offset!=null) fields.put("start_offset", start_offset);
+		if(end_offset!=null) fields.put("end_offset", end_offset);
+		if(upload_session_id!=null) fields.put("upload_session_id", upload_session_id);
+		fields.put("access_token", access_token); //access_token은 필수
+		System.out.println(fields);
+		
+		try {
+			if(start_offset!=null&&end_offset!=null&&start_offset==end_offset) {
+				Response<Map<String,Object>> result = conn.uploadVideo(page_id, fields).execute();
+				if(result.body().get("success")=="true") {
+					return true;
+				};
+			}
+			Response<Map<String,Object>> result = conn.uploadVideo(page_id, fields).execute();
+			System.out.println("+ + + + + + + + + + + + 페이스북 서버와 통신합니다. + + + + + + + + + + + +");
+			System.out.println("+ + + + + + + + + + + + fields는 아래와 같습니다.+ + + + + + + + + + + +");
+			System.out.println(fields);
+			System.out.println("+ + + + + + + + + + + +result입니다 : "+result);
+			System.out.println("+ + + + + + + + + + + +result.body입니다 : "+result.body());
+			System.out.println("+ + + + + + + + + + + +result.errorBody().string()입니다 : "+result.errorBody().string());
+			System.out.println();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	};
 	
 	public void getTarget(long adAccountId) {
 		

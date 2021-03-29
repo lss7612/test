@@ -22,6 +22,7 @@ public class StreamEx02 {
 			.distinct()
 			.forEach(System.out::println);
 		
+		
 	}
 	
 }

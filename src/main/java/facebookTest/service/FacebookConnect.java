@@ -21,4 +21,7 @@ public interface FacebookConnect {
 	@POST("act_{ad_account_id}/adsets")
 	public Call<Map<String,Object>> makeAdset(@Path("ad_account_id")long adAccountId, @FieldMap Map<String, Object> fields, @Field("access_token") String access_token);
 	
+	@FormUrlEncoded
+	@POST("{page_id}/videos")
+	public Call<Map<String,Object>> uploadVideo(@Path("page_id")String page_id, @FieldMap Map<String,Object> fields);
 }
